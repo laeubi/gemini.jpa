@@ -26,6 +26,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceFactory;
 import org.osgi.framework.ServiceRegistration;
 
+import org.eclipse.gemini.jpa.GeminiUtil;
 import org.eclipse.gemini.jpa.PUnitInfo;
 
 import static org.eclipse.gemini.jpa.GeminiUtil.*;
@@ -87,7 +88,8 @@ public class EMFServiceProxyHandler implements InvocationHandler, ServiceFactory
                 syncUnsetEMF();
             }
         } catch (Throwable t) {
-            t.printStackTrace();
+            GeminiUtil.fatalError("EMFServiceProxyHandler.invoke failed", t);
+            throw t;
         }
         return result;
     }
